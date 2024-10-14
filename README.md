@@ -15,15 +15,27 @@ rwkv-kg是一款基于rwkv模型的知识图谱提取工具。用户输入300-50
 
 寻找实体种类
 
+* input_text： 需要生成图谱的文本 
+* output_path： 实体种类储存地址 
+* base_model： 模型地址 
+* persona_domain_state： persona_states 地址 
+* entity_types_state： entity_types地址
+
 ``` python
-python entity_types.py --input_text --output_path --base_model --persona_domain_state --entity_types_state
+
+python entity_types.py --input_text  --output_path /home/rwkv/Peter/rwkv_graphrag/data/triple_input.jsonl' --base_model /home/rwkv/Peter/models/RWKV-x060-World-7B-v2.1-20240507-ctx4096.pth --persona_domain_state /home/rwkv/Peter/rwkv_graphrag/agents/persona_domain_states/RWKV-x060-World-7B-v2.1-20240507-ctx4096.pth.pth --entity_types_state /home/rwkv/Peter/rwkv_graphrag/agents/entity_type_extraction/RWKV-x060-World-7B-v2.1-20240507-ctx4096.pth.pth
 
 ```
 
 提取三元组
 
+* input_file： 用来提取知识图谱的输入，和entity_types.py的输出相同
+* output_file： 知识图谱储存地址
+* model path： 模型地址
+* states_file： triples_extraction states地址
+
 ``` python
-python triple_extractions.py --input_file --output_file --model_path --states_file
+python triple_extractions.py --input_file /home/rwkv/Peter/rwkv_graphrag/data/triple_input.jsonl --output_file /home/rwkv/Peter/rwkv_graphrag/data/triples.jsonl --model_path /home/rwkv/Peter/models/RWKV-x060-World-7B-v2.1-20240507-ctx4096.pth --states_file /home/rwkv/Peter/rwkv_graphrag/agents/triples/rwkv6_7b_v2.1_triples.pth
 
 ```
 
@@ -33,3 +45,5 @@ python triple_extractions.py --input_file --output_file --model_path --states_fi
 ```
 ```
 输出：{"triples": " {"entities": [{"entity": "空空道人", "description": "一位在大荒山无稽崖青埂峰下经过的访道求仙者，他从石头记中得到启示，将其改名为情僧录。", "id": 1}, {"entity": "石头记", "description": "《石头记》是一部由曹雪芹编写的小说，讲述了红楼梦的故事。", "id": 2}, {"entity": "情僧录", "description": "《情僧录》是空空道人对《石头记》的改编，将其重新命名为《情僧录》。", "id": 3}, {"entity": "红楼梦", "description": "《红楼梦》是曹雪芹所著的一部长篇小说，被认为是中国古代小说的巅峰之作。", "id": 4}, {"entity": "金陵十二钗", "description": "金陵十二钗是《红楼梦》中的一个角色群体，包括贾宝玉、林黛玉、薛宝钗等人物。", "id": 5}, {"entity": "甄士隐", "description": "甄士隐是《红楼梦》中的一个角色，他在葫芦庙失火时失去了女儿英莲。", "id": 6}, {"entity": "贾雨村", "description": "贾雨村是《红楼梦》中的一个角色，他与甄士隐有过交往，并赠送了银子给甄家以帮助甄家度过难关。", "id": 7}, {"entity": "曹雪芹", "description": "曹雪芹是《红楼梦》的作者，他在书中描绘了丰富的人物形象和复杂的社会关系。", "id": 8}, {"entity": "封肃家", "description": "封肃家是曹雪芹居住的地方，也是《红楼梦》故事发生的背景之一。", "id": 9}, {"entity": "如州岳丈封肃家", "description": "如州岳丈封肃家是曹雪芹居住的地方，也是《红楼梦》故事发生的背景之一。", "id": 10}, {"entity": "葫芦庙失火", "description": "葫芦庙失火是《红楼梦》中的一个重要事件，导致了甄士隐女儿英莲的离世。", "id": 11}], "relationships": [{"source": "空空道人", "target": "石头记", "relationship": "空空道人从石头记中得到启示，将其改名为情僧录。", "id": 12}, {"source": "空空道人", "target": "情僧录", "relationship": "空空道人将《石头记》改名为情僧录。", "id": 13}, {"source": "甄士隐", "target": "贾雨村", "relationship": "甄士隐在《红楼梦》中与贾雨村有过交往，并赠送了银子给贾雨村以帮助贾雨村上京赴考。", "id": 14}, {"source": "甄士隐", "target": "曹雪芹", "relationship": "甄士隐在《红楼梦》中与曹雪芹有过交往，并赠送了银子给曹雪芹以帮助曹雪芹上京赴考。", "id": 15}, {"source": "甄士隐", "target": "封肃家", "relationship": "甄士隐在《红楼梦》中与封肃家有过交往，并寄居于封肃家中。", "id": 16}, {"source": "甄士隐", "target": "如州岳丈封肃家", "relationship": "甄士隐在《红楼梦》中与如州岳丈封肃家有过交往，并寄居于如州岳丈封肃家中。", "id": 17}]}"}
+
+# 图谱可视化马上加上
